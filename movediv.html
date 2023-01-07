@@ -1,0 +1,49 @@
+<style>
+#main{
+background-color:red;
+width:20%;
+height:10%;
+position: absolute;
+  z-index: 9;
+  
+}
+</style>
+<div id="main"></div>
+<script>
+
+var p=document.getElementById("main");
+//m();
+//function m(){
+	var a1=0,a2=0,a3=0,a4=0;
+	document.getElementById("main").onmousedown=mousedown;
+
+function mousedown(e){
+	
+	a3=e.clientX;
+	a4=e.clientY;
+	document.addEventListener("mouseup",mouseup);
+	document.addEventListener("mousemove",mousemove);
+	//document.onmouseup=mouseup;
+	//document.onmousemove=mousemove;
+//}
+	function mousemove(e){
+		a1=a3-e.clientX;
+		a2=a4-e.clientY;
+		a3=e.clientX;
+		a4=e.clientY;
+		
+			p.style.top=(p.offsetTop-a2)+"px";
+			p.style.left=(p.offsetLeft-a1)+"px";
+		
+	}
+	function mouseup(){
+	//document.onmouseup=null;
+	//document.onmousemove=null;
+	document.removeEventListener("mouseup",mouseup);
+	document.removeEventListener("mousemove",mousemove);
+	}
+	
+	
+}
+
+</script>
