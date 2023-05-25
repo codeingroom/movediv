@@ -11,39 +11,58 @@ position: absolute;
 <div id="main"></div>
 <script>
 
-var p=document.getElementById("main");
-//m();
-//function m(){
-	var a1=0,a2=0,a3=0,a4=0;
-	document.getElementById("main").onmousedown=mousedown;
+console.log("Welcome");
 
-function mousedown(e){
+var a=document.getElementById("try");
+//=============Window Device=====================
+var a1=0,a2=0,a3=0,a4=0;
+document.addEventListener("mousedown",bhanu);
+function bhanu(e){
 	
-	a3=e.clientX;
-	a4=e.clientY;
+	a1=e.clientX;
+	a2=e.clientY;
+	
 	document.addEventListener("mouseup",mouseup);
-	document.addEventListener("mousemove",mousemove);
-	//document.onmouseup=mouseup;
-	//document.onmousemove=mousemove;
-//}
-	function mousemove(e){
-		a1=a3-e.clientX;
-		a2=a4-e.clientY;
-		a3=e.clientX;
-		a4=e.clientY;
-		
-			p.style.top=(p.offsetTop-a2)+"px";
-			p.style.left=(p.offsetLeft-a1)+"px";
-		
-	}
-	function mouseup(){
-	//document.onmouseup=null;
-	//document.onmousemove=null;
-	document.removeEventListener("mouseup",mouseup);
-	document.removeEventListener("mousemove",mousemove);
-	}
+	document.addEventListener("mousemove",mvs);
 	
+function mvs(e){
+	a3=a1-e.clientX;
+	a4=a2-e.clientY;
+	a1=e.clientX;
+	a2=e.clientY;
+	a.style.top=(a.offsetTop-a4)+"px";
+	a.style.left=(a.offsetLeft-a3)+"px";
+	
+	}
+function mouseup(){
+	a.style.backgroundColor="blue";
+	document.removeEventListener("mouseup",mouseup);
+	document.removeEventListener("mousemove",mvs);
 	
 }
+}
 
+//====================mobile device============================
+var initialX = null;
+var initialY = null;
+
+// Add touch event listeners
+a.addEventListener('touchstart', function(event) {
+  // Store the initial touch position
+  initialX = event.touches[0].clientX - a.offsetLeft;
+  initialY = event.touches[0].clientY - a.offsetTop;
+});
+
+a.addEventListener('touchmove', function(event) {
+  // Calculate the new position based on the touch movement
+  var currentX = event.touches[0].clientX - initialX;
+  var currentY = event.touches[0].clientY - initialY;
+
+  // Set the new position of the element
+  a.style.left = currentX + 'px';
+  a.style.top = currentY + 'px';
+
+  // Prevent the default scrolling behavior
+  event.preventDefault();
+});
 </script>
